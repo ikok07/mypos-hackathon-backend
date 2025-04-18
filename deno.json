@@ -1,0 +1,23 @@
+{
+  "imports": {
+    "@evyweb/ioctopus": "npm:@evyweb/ioctopus@^1.2.0",
+    "@neondatabase/serverless": "npm:@neondatabase/serverless@^1.0.0",
+    "@types/pg": "npm:@types/pg@^8.11.11",
+    "axios": "npm:axios@^1.8.1",
+    "date-fns": "npm:date-fns@^4.1.0",
+    "dotenv": "npm:dotenv@^16.4.7",
+    "drizzle-kit": "npm:drizzle-kit@^0.31.0",
+    "drizzle-orm": "npm:drizzle-orm@^0.42.0",
+    "drizzle-zod": "npm:drizzle-zod@^0.7.1",
+    "hono": "npm:hono@^4.7.2",
+    "pg": "npm:pg@^8.13.3",
+    "svix": "npm:svix@^1.64.1",
+    "uuid": "npm:uuid@^11.1.0",
+    "ws": "npm:ws@^8.18.1",
+    "zod": "npm:zod@^3.24.2"
+  },
+  "tasks": {
+    "run": "deno run --watch -N --node-modules-dir --allow-read --allow-env --env-file=./.env.local ./src/index.ts",
+    "drizzle-kit": "deno run --node-modules-dir -A --env-file=./.env.local npm:drizzle-kit"
+  }
+}
