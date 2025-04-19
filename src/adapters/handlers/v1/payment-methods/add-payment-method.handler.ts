@@ -11,7 +11,7 @@ export async function addPaymentMethodHandler(c: Context, next: Next) {
 
     const user = await getInjection("IGetUserByIdUseCase")(c.get("userId"));
 
-    const isAllowed = getInjection("ICheckAccessUseCase")({
+    const isAllowed = await getInjection("ICheckAccessUseCase")({
         principal: {
             id: c.get("userId"),
             roles: user.publicMetadata["roles"] as string[],
