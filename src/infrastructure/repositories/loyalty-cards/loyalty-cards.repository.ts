@@ -29,6 +29,7 @@ export class LoyaltyCardsRepository
 
             return data;
         } catch (e) {
+            if (e instanceof NotFoundError) throw e;
             throw new DatabaseError(`Failed to get loyalty card! ${e}`);
         }
     }

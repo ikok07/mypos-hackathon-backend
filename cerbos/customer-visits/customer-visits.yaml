@@ -1,0 +1,11 @@
+apiVersion: api.cerbos.dev/v1
+resourcePolicy:
+    resource: customer_visits
+    version: default
+    rules:
+        - name: allow_access_for_staff
+          actions: ["select", "insert", "update", "delete"]
+          roles:
+              - worker
+              - admin
+          effect: EFFECT_ALLOW

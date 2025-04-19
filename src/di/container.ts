@@ -3,6 +3,7 @@ import { DI_RETURN_TYPES, DI_SYMBOLS } from "./types.ts";
 import { createProfilesModule } from "./modules/profiles.module.ts";
 import { createAuthModule } from "./modules/auth.module.ts";
 import { createLoyaltyCardsModule } from "./modules/loyalty-cards.module.ts";
+import { createCustomerVisitsModule } from "./modules/customer-visits.module.ts";
 
 const ApplicationContainer = createContainer();
 
@@ -11,6 +12,10 @@ ApplicationContainer.load(Symbol("ProfilesModule"), createProfilesModule());
 ApplicationContainer.load(
     Symbol("LoyaltyCardsModule"),
     createLoyaltyCardsModule()
+);
+ApplicationContainer.load(
+    Symbol("CustomerVisitsModule"),
+    createCustomerVisitsModule()
 );
 
 export function getInjection<K extends keyof typeof DI_SYMBOLS>(
