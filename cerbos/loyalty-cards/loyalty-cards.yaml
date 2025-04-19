@@ -1,6 +1,6 @@
 apiVersion: api.cerbos.dev/v1
 resourcePolicy:
-    resource: customer_loyalty-card
+    resource: customer_loyalty_card
     version: default
     rules:
         - name: allow_access_for_staff

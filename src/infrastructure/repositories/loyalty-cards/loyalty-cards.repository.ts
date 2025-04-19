@@ -7,6 +7,8 @@ import {
 import { DatabaseError } from "../../../entities/models/errors/db/database.ts";
 import { BaseRepository } from "../base-class.repository.ts";
 import { NotFoundError } from "../../../entities/models/errors/NotFoundError.ts";
+import { ICheckAccessUseCase } from "../../../application/use-cases/auth/check-access.use-case.ts";
+import { AuthorizationError } from "../../../entities/models/errors/auth/AuthorizationError.ts";
 
 export class LoyaltyCardsRepository
     extends BaseRepository

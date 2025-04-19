@@ -13,5 +13,6 @@ export async function protect(c: Context, next: Next) {
         throw new ApiError("Unauthorized!", 401);
 
     c.set("userId", validateResult.auth.userId);
+
     await next();
 }

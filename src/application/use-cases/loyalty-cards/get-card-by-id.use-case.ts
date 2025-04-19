@@ -2,6 +2,6 @@ import { ILoyaltyCardsRepository } from "../../repositories/loyalty-cards/loyalt
 
 export type IGetCardByIdUseCase = ReturnType<typeof getCardByIdUseCase>;
 export const getCardByIdUseCase =
-    (loyaltyCardsRepository: ILoyaltyCardsRepository) => (userId: string) => {
-        return loyaltyCardsRepository.getCardById(userId);
+    (loyaltyCardsRepository: ILoyaltyCardsRepository) => (cardId: string) => {
+        return loyaltyCardsRepository.getCardById(cardId);
     };
