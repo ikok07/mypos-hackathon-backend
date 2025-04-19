@@ -7,60 +7,55 @@ import { successResponse } from "../../../../../entities/utils/handlers/successR
 import { ApiError } from "../../../../../entities/models/errors/ApiError.ts";
 
 const requestBodySchema = z.object({
-  type: z.literal("user.created"),
-  data: z.object({
-    id: z.string(),
-    email_addresses: z.array(
-      z.object({
-        email_address: z.string().email(),
-      })
-    ),
-    phone_numbers: z.array(
-      z.object({
-        phone_number: z.string(),
-      })
-    ),
-    first_name: z.string().min(1),
-    last_name: z.string().min(1),
-    image_url: z.string().url().nullable(),
-  }),
+    type: z.literal("user.created"),
+    data: z.object({
+        id: z.string(),
+        email_addresses: z.array(
+            z.object({
+                email_address: z.string().email(),
+            })
+        ),
+        phone_numbers: z.array(
+            z.object({
+                phone_number: z.string(),
+            })
+        ),
+        first_name: z.string().min(1),
+        last_name: z.string().min(1),
+        image_url: z.string().url().nullable(),
+    }),
 });
 
 export async function userCreatedWebhookHandler(c: Context, next: Next) {
-  const payload = await c.req.text();
-  const result = protectWebhook(
-    c,
-    Deno.env.get("USER_CREATED_WEBHOOK_SECRET")!,
-    payload
-  );
-  if (!result) throw new ApiError("Unauthorized", 401);
+    const payload = await c.req.text();
+    const result = protectWebhook(
+        c,
+        Deno.env.get("USER_CREATED_WEBHOOK_SECRET")!,
+        payload
+    );
+    if (!result) throw new ApiError("Unauthorized", 401);
 
-  const { data: body, error: bodyError } = requestBodySchema.safeParse(
-    JSON.parse(payload)
-  );
-  if (bodyError) throw new ApiError("Invalid body", 400);
+    const { data: body, error: bodyError } = requestBodySchema.safeParse(
+        JSON.parse(payload)
+    );
+    if (bodyError) throw new ApiError("Invalid body", 400);
 
-  await axios.patch(
-    `https://api.clerk.com/v1/users/${body.data.id}/metadata`,
-    {
-      public_metadata: {
-        roles: ["user"],
-      },
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${Deno.env.get("CLERK_SECRET_KEY")!}`,
-      },
-    }
-  );
+    const updateUserMetadataUseCase = getInjection(
+        "IUpdateUserMetadataUseCase"
+    );
+    await updateUserMetadataUseCase(body.data.id, {
+        publicMetadata: {
+            roles: ["user"],
+        },
+    });
 
-  const createProfileUseCase = getInjection("ICreateProfileUseCase");
-  await createProfileUseCase({
-    id: body.data.id,
-    name: `${body.data.first_name} ${body.data.last_name}`,
-    email: body.data.email_addresses[0].email_address,
-    phone: body.data.phone_numbers[0].phone_number,
-  });
+    const createProfileUseCase = getInjection("ICreateProfileUseCase");
+    await createProfileUseCase({
+        id: body.data.id,
+        name: `${body.data.first_name} ${body.data.last_name}`,
+        email: body.data.email_addresses[0].email_address,
+        phone: body.data.phone_numbers[0].phone_number,
+    });
 
-  return successResponse(c);
+    return successResponse(c);
 }
