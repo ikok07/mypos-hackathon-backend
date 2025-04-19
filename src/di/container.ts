@@ -4,6 +4,7 @@ import { createProfilesModule } from "./modules/profiles.module.ts";
 import { createAuthModule } from "./modules/auth.module.ts";
 import { createLoyaltyCardsModule } from "./modules/loyalty-cards.module.ts";
 import { createCustomerVisitsModule } from "./modules/customer-visits.module.ts";
+import { createPaymentMethodsModule } from "./modules/payment-methods.module.ts";
 
 const ApplicationContainer = createContainer();
 
@@ -16,6 +17,10 @@ ApplicationContainer.load(
 ApplicationContainer.load(
     Symbol("CustomerVisitsModule"),
     createCustomerVisitsModule()
+);
+ApplicationContainer.load(
+    Symbol("PaymentMethodsModule"),
+    createPaymentMethodsModule()
 );
 
 export function getInjection<K extends keyof typeof DI_SYMBOLS>(

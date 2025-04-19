@@ -22,6 +22,20 @@
       "when": 1745075726605,
       "tag": "0002_add-store-related-tables",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1745081058849,
+      "tag": "0003_add-profile-id-to-payment-methods",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1745082330531,
+      "tag": "0004_modify-payment-methods",
+      "breakpoints": true
     }
   ]
 }

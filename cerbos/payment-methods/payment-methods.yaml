@@ -1,0 +1,10 @@
+apiVersion: api.cerbos.dev/v1
+resourcePolicy:
+    resource: payment_methods
+    version: default
+    rules:
+        - name: allow_access_for_admin
+          actions: ["select", "insert", "update", "delete"]
+          roles:
+              - admin
+          effect: EFFECT_ALLOW

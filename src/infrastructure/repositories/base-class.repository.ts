@@ -1,6 +1,7 @@
 import * as profiles from "../../drizzle/schema/profiles.ts";
 import * as loyaltyCards from "../../drizzle/schema/loyalty_cards.ts";
 import * as customerVisits from "../../drizzle/schema/customer_visits.ts";
+import * as paymentMethods from "../../drizzle/schema/payment_methods.ts";
 
 import ws from "ws";
 
@@ -12,6 +13,7 @@ export class BaseRepository {
         ...profiles,
         ...loyaltyCards,
         ...customerVisits,
+        ...paymentMethods,
     };
 
     protected queryDB<T>(

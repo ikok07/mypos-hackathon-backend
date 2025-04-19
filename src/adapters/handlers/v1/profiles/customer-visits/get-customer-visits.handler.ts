@@ -1,7 +1,6 @@
 import { Context, Next } from "hono";
 import { getInjection } from "../../../../../di/container.ts";
 import { successResponse } from "../../../../../entities/utils/handlers/successResponse.ts";
-import { AuthorizationError } from "../../../../../entities/models/errors/auth/AuthorizationError.ts";
 import { NotFoundError } from "../../../../../entities/models/errors/NotFoundError.ts";
 import { ApiError } from "../../../../../entities/models/errors/ApiError.ts";
 

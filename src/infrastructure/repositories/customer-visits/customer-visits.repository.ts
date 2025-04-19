@@ -15,18 +15,11 @@ export class CustomerVisitsRepository
 {
     async getCustomerVisits(userId: string): Promise<CustomerVisits[]> {
         try {
-            const data = await this.queryDB((db) => {
+            return await this.queryDB((db) => {
                 return db.query.customerVisitsTable.findMany({
                     where: eq(customerVisitsTable.profile_id, userId),
                 });
             });
-
-            if (!data)
-                throw new NotFoundError(
-                    "Customer visits for this userId could not be found!"
-                );
-
-            return data;
         } catch (e) {
             if (e instanceof NotFoundError) throw e;
             throw new DatabaseError(`Could not get customer visits: ${e}`);

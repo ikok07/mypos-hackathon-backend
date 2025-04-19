@@ -8,6 +8,10 @@ import {
     LOYALTY_CARDS_TYPES,
 } from "./types/loyalty-cards.types.ts";
 import {
+    PAYMENT_METHODS_SYMBOLS,
+    PAYMENT_METHODS_TYPES,
+} from "./types/payment-methods.types copy.ts";
+import {
     PROFILES_RETURN_TYPES,
     PROFILES_SYMBOLS,
 } from "./types/profiles.types.ts";
@@ -17,10 +21,12 @@ export const DI_SYMBOLS = {
     ...AUTH_SYMBOLS,
     ...LOYALTY_CARDS_SYMBOLS,
     ...CUSTOMER_VISITS_CARDS_SYMBOLS,
+    ...PAYMENT_METHODS_SYMBOLS,
 };
 
 export interface DI_RETURN_TYPES
     extends PROFILES_RETURN_TYPES,
         AUTH_RETURN_TYPES,
         LOYALTY_CARDS_TYPES,
-        CUSTOMER_VISITS_CARDS_TYPES {}
+        CUSTOMER_VISITS_CARDS_TYPES,
+        PAYMENT_METHODS_TYPES {}
