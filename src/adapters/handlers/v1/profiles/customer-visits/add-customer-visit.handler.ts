@@ -22,7 +22,7 @@ export async function addCustomerVisitHandler(c: Context, next: Next) {
     const user = await getUserUseCase(c.get("userId"));
 
     const checkAccessUseCase = getInjection("ICheckAccessUseCase");
-    const isAllowed = checkAccessUseCase({
+    const isAllowed = await checkAccessUseCase({
         principal: {
             id: c.get("userId"),
             roles: user.publicMetadata["roles"] as string[],
@@ -33,7 +33,7 @@ export async function addCustomerVisitHandler(c: Context, next: Next) {
         },
         action: "insert",
     });
-    if (!isAllowed) throw new AuthorizationError("Access denied!");
+    if (!isAllowed) throw new ApiError("Access denied!", 401);
 
     const addCustomerVisitsUseCase = getInjection("IAddCustomerVisitUseCase");
     await addCustomerVisitsUseCase({
