@@ -11,7 +11,10 @@ export const customerVisitsTable = pgTable("customer_visits", {
         .default(sql`gen_random_uuid()`),
     profile_id: text("profile_id")
         .notNull()
-        .references(() => profilesTable.id),
+        .references(() => profilesTable.id, {
+            onDelete: "cascade",
+            onUpdate: "cascade",
+        }),
     date_enter: integer("date_enter").notNull(),
     date_exit: integer("date_exit").notNull(),
 });

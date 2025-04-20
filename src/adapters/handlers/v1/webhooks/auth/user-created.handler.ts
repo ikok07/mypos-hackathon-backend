@@ -57,5 +57,14 @@ export async function userCreatedWebhookHandler(c: Context, next: Next) {
         phone: body.data.phone_numbers[0].phone_number,
     });
 
+    const createProfileBalanceUseCase = getInjection(
+        "ICreateProfileBalanceUseCase"
+    );
+    await createProfileBalanceUseCase({
+        profile_id: body.data.id,
+        amount_bgn: 0,
+        amount_credits: 0,
+    });
+
     return successResponse(c);
 }

@@ -11,7 +11,10 @@ export const profileBalancesTable = pgTable("profile_balances", {
         .default(sql`gen_random_uuid()`),
     profile_id: text("profile_id")
         .notNull()
-        .references(() => profilesTable.id)
+        .references(() => profilesTable.id, {
+            onDelete: "cascade",
+            onUpdate: "cascade",
+        })
         .unique(),
     amount_bgn: integer("amount_bgn").notNull(),
     amount_credits: integer("amount_credits").notNull(),

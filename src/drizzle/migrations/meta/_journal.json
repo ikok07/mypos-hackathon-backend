@@ -43,6 +43,13 @@
       "when": 1745160471288,
       "tag": "0005_make-some-fields-unique",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1745166357781,
+      "tag": "0006_make-some-relationships-cascade",
+      "breakpoints": true
     }
   ]
 }
