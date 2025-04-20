@@ -5,8 +5,8 @@ import {
 } from "../../../drizzle/schema/profile_balances.ts";
 
 export const updateProfileBalanceDataSchema = z.object({
-    amountBgn: z.number().optional(),
-    amountCredits: z.number().optional(),
+    amount_bgn: z.number().optional(),
+    amount_credits: z.number().optional(),
 });
 export type UpdateProfileBalanceData = z.infer<
     typeof updateProfileBalanceDataSchema

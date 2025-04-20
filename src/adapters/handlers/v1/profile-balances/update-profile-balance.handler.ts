@@ -11,6 +11,13 @@ export async function updateProfileBalanceHandler(c: Context, next: Next) {
             updateProfileBalanceDataSchema.safeParse(await c.req.json());
         if (bodyError) throw new ApiError("Invalid body!", 400);
 
+        if (
+            (!!body.amount_bgn && body.amount_bgn < 0) ||
+            (!!body.amount_credits && body.amount_credits < 0)
+        ) {
+            throw new ApiError("Invalid amount!", 400);
+        }
+
         const user = await getInjection("IGetUserByIdUseCase")(c.get("userId"));
 
         const isAllowed = await getInjection("ICheckAccessUseCase")({

@@ -59,8 +59,8 @@ export class ProfileBalancesRepository
                     await db
                         .update(profileBalancesTable)
                         .set({
-                            amount_bgn: data.amountBgn,
-                            amount_credits: data.amountCredits,
+                            amount_bgn: data.amount_bgn,
+                            amount_credits: data.amount_credits,
                         })
                         .where(eq(profileBalancesTable.profile_id, userId))
                         .returning()
