@@ -1,9 +1,9 @@
 import { Context, Next } from "hono";
-import { getInjection } from "../../../../../di/container.ts";
-import { AuthorizationError } from "../../../../../entities/models/errors/auth/AuthorizationError.ts";
+import { getInjection } from "../../../../di/container.ts";
+import { AuthorizationError } from "../../../../entities/models/errors/auth/AuthorizationError.ts";
 import { z } from "zod";
-import { ApiError } from "../../../../../entities/models/errors/ApiError.ts";
-import { successResponse } from "../../../../../entities/utils/handlers/successResponse.ts";
+import { ApiError } from "../../../../entities/models/errors/ApiError.ts";
+import { successResponse } from "../../../../entities/utils/handlers/successResponse.ts";
 
 export const bodySchema = z.object({
     date_enter: z.number(),

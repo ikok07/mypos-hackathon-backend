@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import { catchErrorsHandler } from "../../../../utils/catchErrorsHandler.ts";
-import { getCustomerVisitsHandler } from "../../../../handlers/v1/profiles/customer-visits/get-customer-visits.handler.ts";
-import { addCustomerVisitHandler } from "../../../../handlers/v1/profiles/customer-visits/add-customer-visit.handler.ts";
+import { getCurrentVisitsHandler } from "../../../../handlers/v1/profile/get-current-visits.handler.ts";
 
-const visitsRoutes = new Hono();
+const currentProfileVisitsRoutes = new Hono();
 
-visitsRoutes.get("/", catchErrorsHandler(getCustomerVisitsHandler));
-visitsRoutes.post("/", catchErrorsHandler(addCustomerVisitHandler));
+currentProfileVisitsRoutes.get(
+    "/",
+    catchErrorsHandler(getCurrentVisitsHandler)
+);
 
-export default visitsRoutes;
+export default currentProfileVisitsRoutes;

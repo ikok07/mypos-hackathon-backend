@@ -1,12 +1,17 @@
 import { Hono } from "hono";
 import { catchErrorsHandler } from "../../../../utils/catchErrorsHandler.ts";
-import { getLoyaltyCardByCardIdHandler } from "../../../../handlers/v1/profiles/loyalty-cards/get-loyalty-card-by-card-id.handler.ts";
+import { getCurrentLoyaltyCardHandler } from "../../../../handlers/v1/profile/get-current-loyalty-card.handler.ts";
+import { createCurrentLoyaltyCardHandler } from "../../../../handlers/v1/profile/create-current-loyalty-card.handler.ts";
 
-const loyaltyCardsRoutes = new Hono();
+const currentProfileLoyaltyCardsRoutes = new Hono();
 
-loyaltyCardsRoutes.get(
-    "/:cardId",
-    catchErrorsHandler(getLoyaltyCardByCardIdHandler)
+currentProfileLoyaltyCardsRoutes.get(
+    "/",
+    catchErrorsHandler(getCurrentLoyaltyCardHandler)
+);
+currentProfileLoyaltyCardsRoutes.post(
+    "/",
+    catchErrorsHandler(createCurrentLoyaltyCardHandler)
 );
 
-export default loyaltyCardsRoutes;
+export default currentProfileLoyaltyCardsRoutes;

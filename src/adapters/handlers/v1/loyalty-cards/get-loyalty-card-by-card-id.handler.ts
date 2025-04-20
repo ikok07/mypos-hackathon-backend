@@ -1,8 +1,8 @@
 import { Context, Next } from "hono";
-import { getInjection } from "../../../../../di/container.ts";
-import { ApiError } from "../../../../../entities/models/errors/ApiError.ts";
-import { successResponse } from "../../../../../entities/utils/handlers/successResponse.ts";
-import { NotFoundError } from "../../../../../entities/models/errors/NotFoundError.ts";
+import { getInjection } from "../../../../di/container.ts";
+import { ApiError } from "../../../../entities/models/errors/ApiError.ts";
+import { successResponse } from "../../../../entities/utils/handlers/successResponse.ts";
+import { NotFoundError } from "../../../../entities/models/errors/NotFoundError.ts";
 
 export async function getLoyaltyCardByCardIdHandler(c: Context, next: Next) {
     try {

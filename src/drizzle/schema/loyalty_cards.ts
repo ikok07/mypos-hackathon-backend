@@ -5,14 +5,15 @@ import { z } from "zod";
 import { profilesTable } from "./profiles.ts";
 
 export const loyaltyCardsTable = pgTable("loyalty_cards", {
-  id: text("id")
-    .notNull()
-    .primaryKey()
-    .default(sql`gen_random_uuid()`),
-  profile_id: text("profile_id")
-    .notNull()
-    .references(() => profilesTable.id),
-  expiry_date: integer("expiry_date").notNull(),
+    id: text("id")
+        .notNull()
+        .primaryKey()
+        .default(sql`gen_random_uuid()`),
+    profile_id: text("profile_id")
+        .notNull()
+        .references(() => profilesTable.id)
+        .unique(),
+    expiry_date: integer("expiry_date").notNull(),
 });
 
 export const loyaltyCardsSchema = createSelectSchema(loyaltyCardsTable);

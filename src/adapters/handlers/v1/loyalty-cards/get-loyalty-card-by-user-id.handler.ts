@@ -3,24 +3,26 @@ import { getInjection } from "../../../../di/container.ts";
 import { ApiError } from "../../../../entities/models/errors/ApiError.ts";
 import { successResponse } from "../../../../entities/utils/handlers/successResponse.ts";
 
-export async function getPaymentMethodsHandler(c: Context, next: Next) {
+export async function getLoyaltyCardByUserIdHandler(c: Context, next: Next) {
     const user = await getInjection("IGetUserByIdUseCase")(c.get("userId"));
 
-    const isAllowed = await getInjection("ICheckAccessUseCase")({
+    const checkAccessUseCase = getInjection("ICheckAccessUseCase");
+    const isAllowed = await checkAccessUseCase({
         principal: {
-            id: c.get("userId"),
+            id: user.id,
             roles: user.publicMetadata["roles"] as string[],
         },
         resource: {
-            kind: "payment_methods",
-            id: c.get("userId"),
+            kind: "customer_loyalty_card",
+            id: user.id,
         },
-        action: "select",
+        action: "insert",
     });
-
     if (!isAllowed) throw new ApiError("Access denied!", 401);
 
-    const methods = await getInjection("IGetPaymentMethodsUseCase")();
+    const card = await getInjection("IGetCardByProfileIdUseCase")(
+        c.req.param("userId")
+    );
 
-    return successResponse(c, { data: methods });
+    return successResponse(c, { data: card });
 }

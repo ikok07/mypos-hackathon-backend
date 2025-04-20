@@ -1,4 +1,5 @@
 import { ILoyaltyCardsRepository } from "../../application/repositories/loyalty-cards/loyalty-cards.repository.interface.ts";
+import { ICreateCardUseCase } from "../../application/use-cases/loyalty-cards/create-card.use-case.ts";
 import { IGetCardByIdUseCase } from "../../application/use-cases/loyalty-cards/get-card-by-id.use-case.ts";
 import { IGetCardByProfileIdUseCase } from "../../application/use-cases/loyalty-cards/get-card-by-profile-id.use-case.ts";
 
@@ -6,6 +7,7 @@ export const LOYALTY_CARDS_SYMBOLS = {
     ILoyaltyCardsRepository: Symbol.for("ILoyaltyCardsRepository"),
     IGetCardByIdUseCase: Symbol.for("IGetCardByIdUseCase"),
     IGetCardByProfileIdUseCase: Symbol.for("IGetCardByProfileIdUseCase"),
+    ICreateCardUseCase: Symbol.for("ICreateCardUseCase"),
 };
 
 export interface LOYALTY_CARDS_TYPES {
@@ -13,4 +15,5 @@ export interface LOYALTY_CARDS_TYPES {
 
     IGetCardByIdUseCase: IGetCardByIdUseCase;
     IGetCardByProfileIdUseCase: IGetCardByProfileIdUseCase;
+    ICreateCardUseCase: ICreateCardUseCase;
 }

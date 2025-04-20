@@ -1,33 +1,31 @@
 import { Context, Next } from "hono";
 import { getInjection } from "../../../../di/container.ts";
-import { paymentMethodsInsertSchema } from "../../../../drizzle/schema/payment_methods.ts";
 import { ApiError } from "../../../../entities/models/errors/ApiError.ts";
+import { loyaltyCardsInsertSchema } from "../../../../drizzle/schema/loyalty_cards.ts";
 import { successResponse } from "../../../../entities/utils/handlers/successResponse.ts";
 
-export async function addPaymentMethodHandler(c: Context, next: Next) {
-    const { data: body, error: bodyError } =
-        paymentMethodsInsertSchema.safeParse(await c.req.json());
+export async function createLoyaltyCardHandler(c: Context, next: Next) {
+    const { data: body, error: bodyError } = loyaltyCardsInsertSchema.safeParse(
+        await c.req.json()
+    );
     if (bodyError) throw new ApiError("Invalid body!", 400);
 
     const user = await getInjection("IGetUserByIdUseCase")(c.get("userId"));
 
-    const isAllowed = await getInjection("ICheckAccessUseCase")({
+    const checkAccessUseCase = getInjection("ICheckAccessUseCase");
+    const isAllowed = await checkAccessUseCase({
         principal: {
-            id: c.get("userId"),
+            id: user.id,
             roles: user.publicMetadata["roles"] as string[],
         },
         resource: {
-            kind: "payment_methods",
-            id: c.get("userId"),
+            kind: "customer_loyalty_card",
+            id: user.id,
         },
         action: "insert",
     });
-
     if (!isAllowed) throw new ApiError("Access denied!", 401);
 
-    const method = await getInjection("IAddPaymentMethodUseCase")({
-        type: body.type,
-    });
-
-    return successResponse(c, { data: method });
+    const card = await getInjection("ICreateCardUseCase")(body);
+    return successResponse(c, { data: card });
 }

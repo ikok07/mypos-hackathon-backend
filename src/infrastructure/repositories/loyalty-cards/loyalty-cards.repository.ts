@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { ILoyaltyCardsRepository } from "../../../application/repositories/loyalty-cards/loyalty-cards.repository.interface.ts";
 import {
     LoyaltyCards,
+    LoyaltyCardsInsert,
     loyaltyCardsTable,
 } from "../../../drizzle/schema/loyalty_cards.ts";
 import { DatabaseError } from "../../../entities/models/errors/db/database.ts";
@@ -51,6 +52,17 @@ export class LoyaltyCardsRepository
         } catch (e) {
             if (e instanceof NotFoundError) throw e;
             throw new DatabaseError(`Failed to get loyalty card! ${e}`);
+        }
+    }
+    createCard(card: LoyaltyCardsInsert): Promise<LoyaltyCards> {
+        try {
+            return this.queryDB(async (db) => {
+                return (
+                    await db.insert(loyaltyCardsTable).values(card).returning()
+                )[0];
+            });
+        } catch (e) {
+            throw new DatabaseError(`Failed to create loyalty card: ${e}`);
         }
     }
 }
