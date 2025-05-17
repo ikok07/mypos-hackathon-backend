@@ -2,7 +2,7 @@ import { pgTable, text, doublePrecision, integer } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { profilesTable } from "./profiles.ts";
+import { profilesTable } from "./profiles";
 
 export const customerDiscountsTable = pgTable("customer_discounts", {
     id: text("id")

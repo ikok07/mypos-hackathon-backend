@@ -10,14 +10,19 @@
     "lint": "eslint 'src/**/*.ts'"
   },
   "dependencies": {
+    "@clerk/backend": "^1.32.2",
+    "@clerk/clerk-js": "^5.67.1",
+    "@clerk/express": "^1.4.19",
     "@neondatabase/serverless": "^1.0.0",
     "axios": "^1.9.0",
     "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.43.1",
     "drizzle-zod": "^0.7.1",
     "eslint": "^9.26.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",
     "svix": "^1.65.0",
@@ -26,6 +31,7 @@
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.1",
     "@types/ws": "^8.18.1",
     "drizzle-kit": "^0.31.1",

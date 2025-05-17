@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { catchErrors } from "../../../utils/catch-errors";
-import { testPaymentHandler } from "../../../handlers/payments/test-payment.handler";
+import { createPaymentHandler } from "../../../handlers/payments/create-payment.handler";
+import { getPaymentStatusHandler } from "../../../handlers/payments/get-payment-status.handler";
 
 const paymentsRoutes = Router();
 
-paymentsRoutes.get("/test", catchErrors(testPaymentHandler))
+paymentsRoutes.get("/create", catchErrors(createPaymentHandler));
+paymentsRoutes.get("/:paymentOrderId", catchErrors(getPaymentStatusHandler));
 
 export default paymentsRoutes;

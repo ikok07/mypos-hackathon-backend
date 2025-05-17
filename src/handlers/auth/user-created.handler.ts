@@ -3,6 +3,8 @@ import { z } from "zod";
 import axios from "axios";
 import { Database } from "../../utils/database";
 import { profilesTable } from "../../drizzle/schema/profiles";
+import { profileBalancesTable } from "../../drizzle/schema/profile_balances";
+import { loyaltyCardsTable } from "../../drizzle/schema/loyalty_cards";
 
 const requestBodySchema = z.object({
   type: z.literal("user.created"),
@@ -39,12 +41,24 @@ export async function userCreatedHandler(req: Request, res: Response) {
   });
 
   await Database.queryDb(db => {
-    return db.insert(profilesTable).values({
-      id: body.data.id,
-      name: `${body.data.first_name} ${body.data.last_name}`,
-      email: body.data.email_addresses[0].email_address,
-      phone: body.data.phone_numbers[0].phone_number,
-      image_url: body.data.image_url
+    return db.transaction(async tx => {
+      await tx.insert(profilesTable).values({
+        id: body.data.id,
+        name: `${body.data.first_name} ${body.data.last_name}`,
+        email: body.data.email_addresses[0].email_address,
+        phone: body.data.phone_numbers[0].phone_number,
+        image_url: body.data.image_url
+      });
+
+      await tx.insert(profileBalancesTable).values({
+        profile_id: body.data.id,
+        amount_credits: 0
+      });
+
+      await tx.insert(loyaltyCardsTable).values({
+        profile_id: body.data.id,
+        expiry_date: 1747509914
+      });
     });
   });
 

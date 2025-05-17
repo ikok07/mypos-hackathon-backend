@@ -2,8 +2,8 @@ import { doublePrecision, pgEnum, pgTable, text } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { shopsTable } from "./shops.ts";
-import { productCategoriesTable } from "./product_categories.ts";
+import { shopsTable } from "./shops";
+import { productCategoriesTable } from "./product_categories";
 
 export const productQuantityUnits = pgEnum("product_quantity_units", [
   "pieces",

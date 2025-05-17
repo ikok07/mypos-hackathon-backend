@@ -8,20 +8,17 @@ export const cartItemSchema = z.object({
 });
 
 export const initiatePaymentOptionsSchema = z.object({
-  WalletNumber: z.string(),
   Amount: z.number(),
   Currency: z.string().length(3),
   OrderID: z.string(),
-  SID: z.string(),
   URL_OK: z.string().url(),
   URL_Cancel: z.string().url(),
   URL_Notify: z.string().url(),
   CardTokenRequest: z.number().min(0).max(2),
-  KeyIndex: z.number(),
   CustomerEmail: z.string().email(),
   CustomerFirstNames: z.string(),
   CustomerFamilyName: z.string(),
-  CustomerPhone: z.string(),
+  CustomerPhone: z.string().optional(),
   CustomerCountry: z.string().length(3),
   CustomerCity: z.string(),
   CustomerZIPCode: z.string(),

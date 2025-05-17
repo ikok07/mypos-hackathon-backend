@@ -2,8 +2,8 @@ import { doublePrecision, pgTable, text } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { ordersTable } from "./orders.ts";
-import { productQuantityUnits, productsTable } from "./products.ts";
+import { productQuantityUnits, productsTable } from "./products";
+import { ordersTable } from "./orders";
 
 export const orderProductsTable = pgTable("order_products", {
     id: text("id")

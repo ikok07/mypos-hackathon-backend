@@ -1,0 +1,1 @@
+ALTER TABLE "profile_balances" DROP COLUMN "amount_bgn";

@@ -2,7 +2,7 @@ import { pgTable, text } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { countriesTable } from "./countries.ts";
+import { countriesTable } from "./countries";
 
 export const citiesTable = pgTable("cities", {
   id: text("id")

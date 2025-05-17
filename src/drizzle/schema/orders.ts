@@ -2,7 +2,7 @@ import { integer, pgTable, text } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { profilesTable } from "./profiles.ts";
+import { profilesTable } from "./profiles";
 
 export const ordersTable = pgTable("orders", {
     id: text("id")

@@ -15,6 +15,41 @@
       "when": 1747405930724,
       "tag": "0001_add-all-models",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1747427233623,
+      "tag": "0002_remove-bgn-balance",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1747465139245,
+      "tag": "0003_add-session-tokens",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1747465621229,
+      "tag": "0004_remove-profile-id-from-session-tokens",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1747469165591,
+      "tag": "0005_add-payment-orders",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1747469932267,
+      "tag": "0006_make-payment-order-profile-id-unique",
+      "breakpoints": true
     }
   ]
 }

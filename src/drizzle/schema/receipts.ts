@@ -2,9 +2,8 @@ import { pgTable, text } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { profilesTable } from "./profiles.ts";
-import { paymentMethodsTable } from "./payment_methods.ts";
-import { ordersTable } from "./orders.ts";
+import { paymentMethodsTable } from "./payment_methods";
+import { ordersTable } from "./orders";
 
 export const receiptsTable = pgTable("receipts", {
   id: text("id")

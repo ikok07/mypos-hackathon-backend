@@ -2,7 +2,7 @@ import { integer, pgTable, text } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { profilesTable } from "./profiles.ts";
+import { profilesTable } from "./profiles";
 
 export const profileBalancesTable = pgTable("profile_balances", {
     id: text("id")
@@ -16,7 +16,6 @@ export const profileBalancesTable = pgTable("profile_balances", {
             onUpdate: "cascade",
         })
         .unique(),
-    amount_bgn: integer("amount_bgn").notNull(),
     amount_credits: integer("amount_credits").notNull(),
 });
 

@@ -1,0 +1,1 @@
+ALTER TABLE "payment-orders" ADD CONSTRAINT "payment-orders_profile_id_unique" UNIQUE("profile_id");
